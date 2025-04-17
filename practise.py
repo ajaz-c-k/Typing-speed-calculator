@@ -15,7 +15,7 @@ texts = [
     "While making this i was having lot of fun",
     "I wanted to work in Google.",
     "If you actually try your best you cant loose.",
-    "rasha is cute and beautiful"
+    "Working with this gives me immense joy."
 ]
 
 target_text = random.choice(texts)
