@@ -1,13 +1,15 @@
 import tkinter as tk
 import time
 import random
+import string
+
 
 root= tk.Tk()
 root.title("Typing Speed Calculator by Ajaz")
 root.geometry("700x500")
 
 texts=["Typing fast is arguabily one of the most technical skills.","While making this i was having lot of fun",
-       "I wanted to work in Google.","If you actually try your best you cant loose."]
+       "I wanted to work in Google.","If you actually try your best you cant loose.","rasha is cute and beautiful"]
 
 target_text=random.choice(texts)
 
@@ -61,7 +63,30 @@ def calculate_speed(event):
     else:
         accuracy=0
 
-                 
+
+    highlighted_result = ""
+
+    
+    for i in range(min(len(typed_words), len(target_words))):
+        if typed_words[i].lower() == target_words[i].lower():
+            highlighted_result += f" ✅ {typed_words[i]}"
+        else:
+            highlighted_result += f" ❌ {typed_words[i]}"
+
+    
+    if len(typed_words) > len(target_words):
+        for word in typed_words[len(target_words):]:
+            highlighted_result += f" ❌ {word}"
+
+    
+    if len(typed_words) < len(target_words):
+        for word in target_words[len(typed_words):]:
+            highlighted_result += f" ❌ [missing: {word}]"
+
+    highlight_label.config(text=highlighted_result)
+
+    
+
 
     word_count=len(typed_words)
     wpm=(word_count/total_time)*60 if total_time>0 else 0     
@@ -72,11 +97,21 @@ def calculate_speed(event):
     result_label.config(text=result) 
 
 def restart():
-    global target_text
-    entry.delete(0,tk.END)
+    global target_text, running
+    entry.config(state="normal")       # Temporarily enable if disabled
+    entry.delete(0, tk.END)            # Clear the text
+    entry.config(state="disabled")     # Re-disable until "Start Test"
+
+    # Reset all UI elements
     result_label.config(text="")
-    target_text=random.choice(texts)
-    text_label.config(text=target_text)    
+    highlight_label.config(text="")
+    timer_label.config(text="Time: 0.00 sec")
+
+    # Reset internal states
+    running = False
+    target_text = random.choice(texts)
+    text_label.config(text=target_text)
+
 
 
 
@@ -88,6 +123,10 @@ restart_button.pack(pady=10)
 
 result_label = tk.Label(root, text="", font=("Helvetica", 12), fg="green")
 result_label.pack(pady=10)
+
+highlight_label = tk.Label(root, text="", font=("Helvetica", 12), justify="left", wraplength=600)
+highlight_label.pack(pady=10)
+
 
 
 entry.bind("<Return>",calculate_speed)
