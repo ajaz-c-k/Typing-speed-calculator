@@ -15,7 +15,7 @@ target_text=random.choice(texts)
 text_label = tk.Label(root, text=target_text, font=("Helvetica", 14), wraplength=500)
 text_label.pack(pady=20)
 
-entry = tk.Entry(root, width=50, font=("Helvetica", 14))
+entry = tk.Entry(root, width=50, font=("Helvetica", 14),state="disabled")
 entry.pack(pady=10)
 
 timer_label=tk.Label(root,text="Time: 0.00 sec",font=("Helvetica", 14),fg="purple")
@@ -35,6 +35,7 @@ def update_timer():
 def start_typing():
     global start_time,running
     entry.delete(0,tk.END)
+    entry.config(state="normal")
     entry.focus()
     start_time=time.time()
     running=True
@@ -43,6 +44,7 @@ def start_typing():
 def calculate_speed(event):
     global running
     running =False 
+    entry.config(state="disabled")
     end_time=time.time()
     total_time=end_time-start_time
 
