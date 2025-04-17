@@ -6,7 +6,7 @@ root= tk.Tk()
 root.title("Typing Speed Calculator by Ajaz")
 root.geometry("700x500")
 
-texts=["Typing fast is arguabily one of the most technical skills.","While making this i had lot of fun",
+texts=["Typing fast is arguabily one of the most technical skills.","While making this i was having lot of fun",
        "I wanted to work in Google.","If you actually try your best you cant loose."]
 
 target_text=random.choice(texts)
