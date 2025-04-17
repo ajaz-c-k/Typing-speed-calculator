@@ -6,7 +6,7 @@ root= tk.Tk()
 root.title("Typing Speed Calculator by Ajaz")
 root.geometry("700x500")
 
-texts=["Typing fast is arguabily on of the most technical skill.","While making this i had lot of fun",
+texts=["Typing fast is arguabily one of the most technical skill.","While making this i had lot of fun",
        "I wanted to work in Google.","If you actually try your best you cant loose."]
 
 target_text=random.choice(texts)
@@ -57,7 +57,7 @@ def calculate_speed(event):
     if target_words:
         accuracy=(correct_words/len(target_words) )*100
     else:
-        accuracy=0 
+        accuracy=0
 
                  
 
